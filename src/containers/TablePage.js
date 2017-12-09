@@ -2,23 +2,15 @@ import React, { Component } from 'react';
 import {getSelectedTable, getSelectedSecondTable} from '../reducers';
 import {selectSecondTable} from '../actionCreators';
 import {connect} from 'react-redux';
-import SelectTable from '../components/SelectTable';
+import PathsToWord from '../components/PathsToWord';
 
 class TablePage extends Component {
+
   render() {
-    let selectedTable = null;
-    if (this.props.secondTable) {
-      selectedTable = (
-        <div>{this.props.secondTable}</div>
-      );
-    } else {
-      const {onSelectSecondTable} = this.props;
-      selectedTable = <SelectTable onSelect={onSelectSecondTable}/>
-    };
     return (
       <div>
         <div>{this.props.selectedTable}</div>
-        {selectedTable}
+        <PathsToWord fromTableId={this.props.selectedTable}/>
       </div>
     );
   }
@@ -28,7 +20,6 @@ class TablePage extends Component {
 const mapStateToProps = (state) => (
   {
     selectedTable : getSelectedTable(state),
-    secondTable : getSelectedSecondTable(state),
   }
 );
 
