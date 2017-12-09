@@ -13,3 +13,10 @@ export const selectSecondTable = (tableId) => {
     'tableId' : tableId
   }
 };
+
+export const selectPath = (path) => {
+  return {
+    'type' : 'SELECT_PATH',
+    'path' : path
+  }
+};

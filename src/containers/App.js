@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SelectTable from '../components/SelectTable';
+import DisplayJoin from '../components/DisplayJoin';
 import TablePage from './TablePage';
 import {connect} from 'react-redux';
-import {getSelectedTable} from '../reducers';
+import {getSelectedTable, getSelectedPath} from '../reducers';
 import {selectTable} from '../actionCreators';
 
 class App extends Component {
   render() {
+    if (this.props.selectedPath) {
+      return (
+        <DisplayJoin/>
+      );
+    }
     if (this.props.selectedTable) {
       return (
         <TablePage/>
@@ -24,7 +30,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => (
   {
-    selectedTable : getSelectedTable(state)
+    selectedTable : getSelectedTable(state),
+    selectedPath : getSelectedPath(state),
   }
 );
 

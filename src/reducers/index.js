@@ -21,6 +21,10 @@ export const getSelectedSecondTable = (state) => {
   return fromAppState.getSelectedSecondTable(state.appState);
 }
 
+export const getSelectedPath = (state) => {
+  return fromAppState.getSelectedPath(state.appState);
+}
+
 export const getFieldsToTables = (state) => {
   return fromTables.getFieldsToTables(state.tables);
 }
@@ -28,5 +32,6 @@ export const getFieldsToTables = (state) => {
 export const getTableIdToTables = (state) => {
   return fromTables.getTableIdToTables(state.tables);
 }
+
 
 export default rootReducer;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getTableIdToTables} from '../reducers'
+import {selectPath} from '../actionCreators'
 
 const Table = (props) => {
   const {tables} = props;
@@ -32,7 +33,7 @@ const Path = (props) => {
   });
 
   return (
-    <div style={{border: '5px solid red'}}>
+    <div onClick={props.onClick} style={{border: '5px solid red'}}>
       {components}
     </div>
   );
@@ -44,4 +45,10 @@ const mapStateToProps = (state) => (
   }
 );
 
-export default connect(mapStateToProps)(Path);
+const mapDispatchToProps = (dispatch, ownProps) => (
+  {
+    onClick : () => dispatch(selectPath(ownProps.path))
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Path);

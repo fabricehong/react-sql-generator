@@ -14,9 +14,7 @@ class PathsToWord extends React.Component {
   }
 
   searchPaths(word) {
-    const {fromTableId} = this.props;
-    const {tableIdToTables} = this.props;
-    const {fieldsToTables} = this.props;
+    const {fromTableId, tableIdToTables, fieldsToTables} = this.props;
 
     const alreadyVisitedTables = new Set();
 

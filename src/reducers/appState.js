@@ -10,6 +10,11 @@ const appState = (state = {}, action) => {
           ...state,
           'selectedSecondTable' : action.tableId
         }
+      case 'SELECT_PATH':
+        return {
+          ...state,
+          'selectedPath' : action.path
+        }
     default:
       return state;
   }
@@ -21,6 +26,10 @@ export const getSelectedTable = (state) => {
 
 export const getSelectedSecondTable = (state) => {
   return state.selectedSecondTable;
+}
+
+export const getSelectedPath = (state) => {
+  return state.selectedPath;
 }
 
 export default appState;
