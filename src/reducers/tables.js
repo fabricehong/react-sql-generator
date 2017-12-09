@@ -35,4 +35,8 @@ export const getTables = (state) => {
   return state;
 }
 
+export const getTable = (state, id) => {
+  return state.find((table) => table.id == id);
+}
+
 export default tables;

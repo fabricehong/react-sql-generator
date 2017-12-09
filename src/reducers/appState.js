@@ -1,20 +1,23 @@
 const appState = (state = {}, action) => {
+  let newState;
   switch(action.type) {
     case 'SELECT_TABLE':
-      return {
+      newState = {
         ...state,
         'selectedTable' : action.tableId
+      };
+      delete newState.selectedPath;
+      return newState;
+    case 'SELECT_PATH':
+      return {
+        ...state,
+        'selectedPath' : action.path
       }
-      case 'SELECT_SECOND_TABLE':
-        return {
-          ...state,
-          'selectedSecondTable' : action.tableId
-        }
-      case 'SELECT_PATH':
-        return {
-          ...state,
-          'selectedPath' : action.path
-        }
+    case 'MAIN':
+      newState = {...state};
+      delete newState.selectedTable;
+      delete newState.selectedPath;
+      return newState;
     default:
       return state;
   }
