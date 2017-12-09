@@ -20,14 +20,14 @@ class PathsToWord extends React.Component {
 
     const alreadyVisitedTables = new Set();
 
-    //const result = this.searchTable(alreadyVisitedTables, fromTableId, tableIdToTables, fieldsToTables, word)
-
+    const result = this.searchTable(alreadyVisitedTables, fromTableId, tableIdToTables, fieldsToTables, word)
+/*
     let result = [
       [{table:1, description : "Il y a une occurrence ici"}],
       [{table:1}, {field: 1}, {table:2, column : "IDDOSSIER"}],
       [{table:1}, {field: 1}, {table:2}],
       [{table:1}, {field: 2}, {table:3}, {field: 3}, {table: 2, description : "une autre ici"}],
-    ];
+    ];*/
     return result;
   }
 
@@ -38,19 +38,20 @@ class PathsToWord extends React.Component {
     };
     console.log("Exploring table '"+fromTableId+"'");
     let table = tableIdToTables[fromTableId];
-    if (table.label.includes(word)) {
+    if (word != '' && word != undefined && table.label.includes(word)) {
       const newResultDescription = [{...currentPart, description : table.label}];
       result.push(newResultDescription);
     }
     alreadyVisitedTables.add(fromTableId);
     const fieldResult = {};
     table.fields.forEach((fieldId) => {
-      let tableIds = fieldsToTables[fieldId];
-      tableIds.forEarch((tId) => {
-        if (!alreadyVisitedTables.has(tId)) {
-          let subResult = this.searchTable(alreadyVisitedTables, tId, tableIdToTables, fieldsToTables, word);
+      let tables = fieldsToTables[fieldId];
+      tables.forEach((table) => {
+        if (!alreadyVisitedTables.has(table.id)) {
+          let subResult = this.searchTable(alreadyVisitedTables, table.id, tableIdToTables, fieldsToTables, word);
           subResult.forEach((sr) => {
             const newResult = [currentPart];
+            newResult.push({field: fieldId});
             newResult.push(...sr);
             result.push(newResult);
           });
@@ -71,7 +72,8 @@ class PathsToWord extends React.Component {
   }
 
   render() {
-    const results = this.state.searchResults.map((r) => <Path path={r}/>);
+    let i = 0;
+    const results = this.state.searchResults.map((r) => <Path key={i++} path={r}/>);
     return (
       <div>
         <input type='text' onChange={this.changeText.bind(this)}/>

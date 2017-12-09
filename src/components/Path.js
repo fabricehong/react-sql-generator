@@ -20,11 +20,12 @@ const Field = (props) => {
 
 const Path = (props) => {
   const {path} = props;
+  let i = 0;
   const components = path.map((part) => {
     if (part.table) {
-      return <Table desc={part} tables={props.tableIdToTables}/>;
+      return <Table key={i++} desc={part} tables={props.tableIdToTables}/>;
     } else if (part.field) {
-      return <Field desc={part}/>;
+      return <Field key={i++} desc={part}/>;
     } else {
       throw "Error with part " + part;
     }
