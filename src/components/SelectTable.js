@@ -33,6 +33,7 @@ class SelectTable extends Component {
             {item.label}
           </div>
         }
+        inputProps={{placeholder: 'Search table'}}
         value={value}
         onChange={(e) => {
           this.filter(e.target.value);

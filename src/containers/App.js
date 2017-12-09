@@ -7,7 +7,7 @@ import TablePage from './TablePage';
 import {connect} from 'react-redux';
 import {getSelectedTable, getSelectedPath, getSelectedSecondTable} from '../reducers';
 import {selectTable, navMain} from '../actionCreators';
-import {Breadcrumb} from 'react-bootstrap';
+import {PageHeader, Navbar, Nav, NavItem, Breadcrumb, Grid, Col, Row, Panel} from 'react-bootstrap';
 
 class App extends Component {
   render() {
@@ -37,12 +37,37 @@ class App extends Component {
       );
     }
     return (
-      <div className="App">
-        <Breadcrumb>
-          {breadcrumbs}
-        </Breadcrumb>
-        {content}
-      </div>
+      <Grid style={{marginTop:20}}>
+        <Row className="show-grid">
+          <Col md={2}/>
+          <Col md={8}>
+            <Navbar inverse collapseOnSelect>
+              <Navbar.Header>
+                <Navbar.Brand>
+                  <a href="#">SQL Generator</a>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+              </Navbar.Header>
+              <Navbar.Collapse>
+                <Nav activeKey={1}>
+                  <NavItem eventKey={1} href="#">Generate SQL</NavItem>
+                  <NavItem eventKey={2} href="#">Tables</NavItem>
+                </Nav>
+                {/*<Nav pullRight>
+                  <NavItem eventKey={1} href="#">About</NavItem>
+                </Nav>*/}
+              </Navbar.Collapse>
+            </Navbar>
+            <Breadcrumb>
+              {breadcrumbs}
+            </Breadcrumb>
+            <Panel>
+              {content}
+            </Panel>
+          </Col>
+          <Col md={2}/>
+        </Row>
+      </Grid>
     );
   }
 }

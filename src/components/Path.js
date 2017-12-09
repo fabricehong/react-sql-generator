@@ -2,20 +2,21 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {getTableIdToTables} from '../reducers'
 import {selectPath} from '../actionCreators'
+import {Alert, Badge} from 'react-bootstrap';
 
 const Table = (props) => {
   const {tables} = props;
   const tableId = props.desc.table;
   const table = tables[tableId];
   return (
-    <div>{table.label}</div>
+    <span>&nbsp;<strong>{table.label}</strong>&nbsp;</span>
   );
 };
 
 const Field = (props) => {
   const fieldId = props.desc.field;
   return (
-    <div>{fieldId}</div>
+    <Badge>{fieldId}</Badge>
   );
 };
 
@@ -33,9 +34,9 @@ const Path = (props) => {
   });
 
   return (
-    <div onClick={props.onClick} style={{border: '5px solid red'}}>
+    <Alert onClick={props.onClick} bsStyle="warning">
       {components}
-    </div>
+    </Alert>
   );
 }
 

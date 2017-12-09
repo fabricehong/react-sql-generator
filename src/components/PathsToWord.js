@@ -36,7 +36,7 @@ class PathsToWord extends React.Component {
     };
     console.log("Exploring table '"+fromTableId+"'");
     let table = tableIdToTables[fromTableId];
-    if (word != '' && word != undefined && table.label.includes(word)) {
+    if (word != '' && word != undefined && table.label.toLowerCase().includes(word.toLowerCase())) {
       const newResultDescription = [{...currentPart, description : table.label}];
       result.push(newResultDescription);
     }
@@ -74,7 +74,7 @@ class PathsToWord extends React.Component {
     const results = this.state.searchResults.map((r) => <Path key={i++} path={r}/>);
     return (
       <div>
-        <input type='text' onChange={this.changeText.bind(this)}/>
+        <input type='text' placeholder="Find relation" onChange={this.changeText.bind(this)}/>
         <div>{this.state.word}</div>
         {results}
       </div>

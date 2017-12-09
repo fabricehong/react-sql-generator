@@ -1,8 +1,8 @@
 const tables = (state, action) => {
   return [
-    { id: 1, label: 'foo', fields: [1, 2, 4] },
-    { id: 2, label: 'bar', fields: [2, 3] },
-    { id: 3, label: 'baz', fields: [3, 4] },
+    { id: 1, label: 'FINA.CTXABSTRACTDOSSIER', fields: [1, 2, 4] },
+    { id: 2, label: 'FINA.CTXEVENEMENT', fields: [2, 3] },
+    { id: 3, label: 'FINA.CTXPOUDOSSIER', fields: [3, 4] },
   ]
 };
 
