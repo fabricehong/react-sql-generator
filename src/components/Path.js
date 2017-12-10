@@ -20,24 +20,46 @@ const Field = (props) => {
   );
 };
 
-const Path = (props) => {
-  const {path} = props;
-  let i = 0;
-  const components = path.map((part) => {
-    if (part.table) {
-      return <Table key={i++} desc={part} tables={props.tableIdToTables}/>;
-    } else if (part.field) {
-      return <Field key={i++} desc={part}/>;
-    } else {
-      throw "Error with part " + part;
-    }
-  });
+class Path extends React.Component{
 
-  return (
-    <Alert onClick={props.onClick} bsStyle="warning">
-      {components}
-    </Alert>
-  );
+  constructor(props) {
+    super(props);
+    this.state = {
+      hover: false
+    };
+    this.toggleHover= this.toggleHover.bind(this);
+  }
+
+  toggleHover(state){
+    this.setState({hover: state})
+  }
+
+  render() {
+    var linkStyle;
+    if (this.state.hover) {
+      linkStyle = 'danger';
+    } else {
+      linkStyle = 'warning';
+    }
+
+    const {path} = this.props;
+    let i = 0;
+    const components = path.map((part) => {
+      if (part.table) {
+        return <Table key={i++} desc={part} tables={this.props.tableIdToTables}/>;
+      } else if (part.field) {
+        return <Field key={i++} desc={part}/>;
+      } else {
+        throw "Error with part " + part;
+      }
+    });
+
+    return (
+      <Alert onClick={this.props.onClick} bsStyle={linkStyle} onMouseEnter={() => {this.toggleHover(true)}} onMouseLeave={() => {this.toggleHover(false)}} >
+        {components}
+      </Alert>
+    );
+  }
 }
 
 const mapStateToProps = (state) => (
@@ -51,5 +73,4 @@ const mapDispatchToProps = (dispatch, ownProps) => (
     onClick : () => dispatch(selectPath(ownProps.path))
   }
 );
-
 export default connect(mapStateToProps, mapDispatchToProps)(Path);
