@@ -1,4 +1,47 @@
+import {combineReducers} from 'redux'
+
 const tables = (state, action) => {
+  return [
+    {
+      name: 'FINA.CTXABSTRACTDOSSIER',
+      fields: [
+        {
+            name: 'IDDOSSIER'
+        },
+        {
+            name: 'NOCUSTOMER'
+        },
+        {
+            name: 'TRUC'
+        },
+      ],
+    },
+    {
+      name: 'FINA.CTXEVENEMENT',
+      fields: [
+        {
+            name: 'IDDOSSIER'
+        },
+        {
+            name: 'TYPE'
+        }
+      ],
+    },
+    {
+      name: 'FINA.CTXPOUDOSSIER',
+      fields: [
+        {
+            name: 'IDDOSSIER'
+        },
+        {
+            name: 'STATUS'
+        }
+      ],
+    }
+  ]
+};
+
+const relations = (state, action) => {
   return [
     { id: 1, label: 'FINA.CTXABSTRACTDOSSIER', fields: [1, 2, 4] },
     { id: 2, label: 'FINA.CTXEVENEMENT', fields: [2, 3] },
@@ -39,4 +82,9 @@ export const getTable = (state, id) => {
   return state.find((table) => table.id == id);
 }
 
-export default tables;
+export default combineReducers(
+  {
+    tables,
+    relations
+  }
+);
